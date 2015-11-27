@@ -1,5 +1,5 @@
 ####HQLi playground
-I wrote this vulnerable application for studying  HQLi injections.
+I wrote this vulnerable application for studying  HQL injections.
 
 ####How I can use it
  - Install Apache Maven and build war package.
