@@ -51,6 +51,23 @@ public class PostController {
 
 		return dtos;
 	}
+	
+	
+	@GET
+	@Path("/secure2/{name}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<PostDto> doName_Secure2(@PathParam("name") String name) throws Exception {
+
+		List<Post> posts = postRepository.getByName_Criteria(name);
+
+		List<PostDto> dtos = new ArrayList<>();
+
+		for (Post post : posts) {
+			dtos.add(new PostDto(post.getId(), post.getName()));
+		}
+
+		return dtos;
+	}
 
 	@POST
 	@Path("/{name}")

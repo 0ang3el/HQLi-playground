@@ -7,6 +7,9 @@ import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Stateless
@@ -31,4 +34,15 @@ public class PostRepository {
 		query.setParameter("name", name);
 		return (List<Post>) query.getResultList();
 	}
+	
+	public List<Post> getByName_Criteria(String name) {
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Post> criteria = builder.createQuery(Post.class);
+		Root<Post> pRoot = criteria.from(Post.class);
+		criteria.where(builder.equal(pRoot.get("name"), name));
+		
+		Query query = em.createQuery(criteria);
+		return (List<Post>) query.getResultList();
+	}
+	
 }
